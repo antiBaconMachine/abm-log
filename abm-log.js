@@ -1,9 +1,5 @@
 var abm = abm || {};
 
-$("document").ready(function(){
-    abm.log.init("info");
-});
-
 abm.log = (function(){
     
     var fallback = function(msg){
