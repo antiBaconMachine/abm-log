@@ -29,6 +29,8 @@ describe("log", function() {
     it("should disable all levels when a falsy value is set as the lvel", function() {
         abm.log.init(0);
         expect(console.error()).toEqual("error suppressed");
-    }) 
+    });
+    
+    it("should prefer the url debug param to the function param", function(){});
 })
 
