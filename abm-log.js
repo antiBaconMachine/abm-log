@@ -1,9 +1,27 @@
 var abm = abm || {};
 
+/**
+ *Logging utility allows granular control of js logging.
+ *
+ *wraps standard console with guard to filter out unwanted levels.
+ *reads url param or can be called programatically
+ *
+ *usage 
+ *
+ *abm.log.init([minlevel])
+ *
+ *if the url param debug=minlevel exists then this will be used, otherwise the argument minlevel will be used
+ *finally if neither of these are present the fallback is "info".
+ *
+ *minlevel can be one of ["debug","info","warn","error"]
+ */
 abm.log = (function(){
     
+    /**
+     *Fallback function used when no console is present
+     */ 	
     var fallback = function(msg){
-        alert(msg);
+        //alert(msg);
     };
     var suppressed = function(level) {
         return function() {
@@ -18,11 +36,11 @@ abm.log = (function(){
     
         init : function(minLevel) {
             var params = abm.getUrlParams();
-            minLevel = params["debug"] || minLevel;
-        
+            minLevel = params["debug"] || minLevel || "info";
+       	    
             //TODO: firebug lite
             window.console = window.console || {};
-        
+        	
             var clear = false;
             for (var i=0; i<self.levels.length; i++) {
                 var level = self.levels[i];
