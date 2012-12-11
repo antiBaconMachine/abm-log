@@ -1,6 +1,4 @@
-var abm = abm || {};
-
-abm.log = (function(){
+define(["abm-util"], function(util){
     
     var fallback = function(msg){
         alert(msg);
@@ -17,7 +15,7 @@ abm.log = (function(){
         levels : ["debug","info","warn","error"],
     
         init : function(minLevel) {
-            var params = abm.getUrlParams();
+            var params = util.getUrlParams();
             minLevel = params["debug"] || minLevel;
         
             //TODO: firebug lite
@@ -51,24 +49,4 @@ abm.log = (function(){
         }
     };
     return self;
-}());
-
-abm.getUrlParams = abm.getUrlParams || 
-    function() {
-        var vars = {}, hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = hashes.length-1; i >= 0; i--)
-        {
-            hash = hashes[i].split('=');
-
-            var val = hash[1];
-            var intVal = parseInt(val);
-            if (!isNaN(intVal)) {
-                val = intVal;
-            }else if (val==="true" || val==="false") {
-                val = Boolean(val);
-            }
-            vars[hash[0]] = val;
-        }
-        return vars;
-    };
+});
